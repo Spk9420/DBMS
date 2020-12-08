@@ -1,0 +1,28 @@
+create database company;
+
+use company;
+
+create table department(dept_id INTEGER ,dept_name varchar(50));
+
+insert into department value(1,'Finance');
+insert into department values(2,'Training');
+insert into department values(3,'Marketing');
+
+create table employee(emp_id INTEGER, emp_name varchar(30),dept_id INTEGER, salary INTEGER, manager INTEGER);
+
+insert into employee values(1,'Arun',1,8000,4);
+insert into employee values(2,'Kiran',1,7000,1);
+insert into employee values(3,'Scott',1,3000,1);
+insert into employee values(4,'Max',2,9000,null);
+insert into employee values(5,'Jack',2,8000,4);
+insert into employee values(6,'King',null,6000,1);
+
+alter table department add primary key (dept_id);
+
+alter table employee add foreign key (dept_id) references department(dept_id);
+
+alter table department modify dept_id integer not null;
+select *, sum(salary) from employee group by dept_id;
+select dept_id , sum(salary) from employee group by dept_id having sum(salary) > 17000;
+select dept_id, sum(salary) from employee group by dept_id having sum(salary)>18000;
+select dept_id, sum(salary) from employee group by dept_id having sum(salary)<20000;
